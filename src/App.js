@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { useCallback, useState } from "react";
+import "./App.css";
+import Test from "./components/Test";
 
 function App() {
+  let [count, setCount] = useState(0);
+
+  let [data, setData] = useState("garvit");
+
+  let print = useCallback(() => {
+    console.log("print called");
+    // setData([{ name: "user" }]);
+  }, [data]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Test data={data} print={print} />
+
+      <h1>{count}</h1>
+      <button onClick={() => setCount(count + 1)}>+</button>
+
+      <button onClick={() => setData("user")}>Change Data</button>
     </div>
   );
 }
